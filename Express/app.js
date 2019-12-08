@@ -1,5 +1,5 @@
 const express = require("express");
-const port = 4000;
+const port = process.env.PORT || 4000; //Puerto 4000 o definido por Heroku
 const app = express();
 const bodyParser = require("body-parser");
 const http = require("http").createServer(app);
@@ -14,6 +14,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
   databaseURL: "https://auth-8afcb.firebaseio.com"
 });
 */
+app.all('*', function(req, res, next) {
+  var origin = req.get('origin'); 
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 db.connect({
   host: "198.54.116.46",
   port: 21098,
@@ -30,3 +38,10 @@ db.connect({
         console.log(`Hackathon Escobedo server running on Port:${port}!`)
     );
 });
+
+
+
+/*
+HEROKU en root
+git subtree push --prefix Express heroku master
+*/
