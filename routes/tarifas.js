@@ -23,6 +23,7 @@ router.post("/", async (req,res)=>{
 });
 router.put("/:idTarifa", async (req,res)=>{
     try{
+        const { idTarifa } = req.params;
         const {monto, superficie} = req.body;
         await db.rawQuery(`CALL updateTarifa(${idTarifa},${monto},${superficie})`);
         res.sendStatus(200);
