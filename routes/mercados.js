@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const db = require("tnc_mysql_connector2");
+const { token } = require("../middleware/token");
+const fbAuth = require("../middleware/fbAuth");
 
 router.get("/", async (req,res)=>{
     try{
