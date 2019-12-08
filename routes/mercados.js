@@ -39,8 +39,8 @@ router.post("/", async (req,res)=>{
 });
 router.put("/:idMercado", async (req,res)=>{
     try{
-        const {idColonia, dia, turno, inicia, termina, anexo} = req.body;
-        const result = await db.rawQuery(`CALL updateMercado(${req.params.idMercado},${idColonia}, ${dia}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
+        const {colonia, dia, turno, inicia, termina, anexo} = req.body;
+        const result = await db.rawQuery(`CALL updateMercado(${req.params.idMercado},${colonia}, ${dia}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
         res.sendStatus(200);
         
     }catch(error){
