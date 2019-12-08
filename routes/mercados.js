@@ -7,14 +7,12 @@ const fbAuth = require("../middleware/fbAuth");
 router.get("/", async (req,res)=>{
     try{
         if(req.query.fecha){
-            const result = await db.rawQuery(`CALL getMercadosFecha(${req.query.fecha})`);
-
+            const result = await db.rawQuery(`CALL getMercadosFecha("${req.query.fecha}")`);
             res.send(result[0]);  
         }else{
             const result = await db.rawQuery(`CALL getMercados()`);
             res.send(result[0]);  
-        }
-        res.send(result[0]);     
+        }   
     }catch(error){
         res.status(500).send(error.message);
     }
