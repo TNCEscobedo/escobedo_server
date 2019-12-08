@@ -7,8 +7,14 @@ const fbAuth = require("../middleware/fbAuth");
 
 router.get("/", async (req,res)=>{
     try{
-        const result = await db.rawQuery(`CALL getCobros()`);
-        res.send(result[0]);
+        if(req.query.fechaFin){
+            const result = await db.rawQuery(`CALL getCobrosIntervalo("${req.query.fechaInicio}","${req.query.fechaFin}")`);
+            res.send(result[0]);
+        }else{
+            const result = await db.rawQuery(`CALL getCobros()`);
+            res.send(result[0]);
+        }
+        
         
     }catch(error){
         res.status(500).send(error.message);
