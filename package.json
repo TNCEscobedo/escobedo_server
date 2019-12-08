@@ -13,6 +13,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "moment": "^2.24.0",
     "mysql2": "^2.0.2",
     "tnc_mysql_connector2": "^2.0.0",
     "tnc_mysql_parser": "^1.1.14"

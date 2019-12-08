@@ -21,6 +21,15 @@ router.get("/:idMercado", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
+        const {idUsuario,idMercado,fecha} = req.body;
+        const result = await db.rawQuery(`CALL getPuestosMercado(${idUsuario},${idMercado},${fecha})`);
+        res.send(result[0]);     
+    }catch(error){
+        res.status(500).send(error.message);
+    }
+});
+router.post("/", async (req,res)=>{
+    try{
         const {idColonia, dia, turno, inicia, termina, anexo} = req.body;
         const result = await db.rawQuery(`CALL insertMercado(${idColonia}, ${dia}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
         res.sendStatus(200);
@@ -28,10 +37,10 @@ router.post("/", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
-router.put("/", async (req,res)=>{
+router.put("/:idMercado", async (req,res)=>{
     try{
-        const {idMercado, idColonia, dia, turno, inicia, termina, anexo} = req.body;
-        const result = await db.rawQuery(`CALL updateMercado(${idMercado},${idColonia}, ${dia}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
+        const {idColonia, dia, turno, inicia, termina, anexo} = req.body;
+        const result = await db.rawQuery(`CALL updateMercado(${req.params.idMercado},${idColonia}, ${dia}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
         res.sendStatus(200);
         
     }catch(error){

@@ -1,16 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { query } = require("../db.js");
-
+const db = require("tnc_mysql_connector2");
+const moment = require("moment");
 router.get("/", async (req,res)=>{
     try{
-        query(
-            'SELECT * FROM cobro',
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const result = await db.rawQuery(`CALL getGiros()`);
+        res.send(result[0]);
         
     }catch(error){
         res.status(500).send(error.message);
@@ -18,42 +13,28 @@ router.get("/", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
-        const  {idPuesto,idMercado,idInspecto,nombre,monto,pagado,idTarifa,folio,fecha_hora}= req.body;
-        query(
-            `CALL insertCobro(${idPuesto},${idMercado},${idInspecto},${nombre},${monto},${pagado},${idTarifa},${folio},${fecha_hora})`,
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const {idPuesto,idMercado,idInspector, nombre, monto, pagado, idTarifa, folio, fecha_hora} = req.body;
+        const result = await db.rawQuery(`CALL insertCobro(idPuesto,idMercado,idInspector, nombre, monto, pagado, idTarifa, folio, fecha_hora)`);
+        res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);
     }
 });
-router.put("/", async (req,res)=>{
+router.put("/:idGiro", async (req,res)=>{
     try{
-        query(
-            'SELECT * FROM cobro',
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const {nombre} = req.body;
+        await db.rawQuery(`CALL updateGiro(${req.params.idGiro},"${nombre}")`);
+        res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);
     }
 });
-router.delete("/", async (req,res)=>{
+router.delete("/:idGiro", async (req,res)=>{
     try{
-        query(
-            'SELECT * FROM cobro',
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const result = await db.rawQuery(`CALL deleteGiro(${req.params.idGiro})`);
+        res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);
