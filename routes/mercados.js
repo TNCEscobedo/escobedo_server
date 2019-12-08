@@ -21,7 +21,7 @@ router.get("/", async (req,res)=>{
 router.get("/:idMercado", async (req,res)=>{
     try{
         const result = await db.rawQuery(`CALL getPuestosMercado(${req.params.idMercado})`);
-        res.send(result);     
+        res.send(result[0]);     
     }catch(error){
         res.status(500).send(error.message);
     }
