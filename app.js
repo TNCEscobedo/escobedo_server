@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const http = require("http").createServer(app);
 const db = require("tnc_mysql_connector2");
+const cors = require("cors");
 //const admin = require("firebase-admin"); 
 //const serviceAccount = require("./firebaseKey.json");
 
@@ -21,7 +22,22 @@ app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
-
+app.use(
+  cors({
+    origin: function(origin, callback) {
+      // allow requests with no origin
+      // (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg =
+          "The CORS policy for this site does not " +
+          "allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    }
+  })
+);
 db.connect({
   host: "198.54.116.46",
   port: 21098,

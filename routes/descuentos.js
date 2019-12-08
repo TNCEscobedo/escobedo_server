@@ -4,8 +4,8 @@ const { query } = require("../db.js");
 const db = require("tnc_mysql_connector2");
 router.get("/", async (req,res)=>{
     try{
-        const result = await db.rawQuery(`CALL insertDescuento("${razon}", ${idOferente})`);
-        res.send(result);
+        const result = await db.rawQuery(`CALL getDescuentos()`);
+        res.send(result[0]);
         
     }catch(error){
         res.status(500).send(error.message);
