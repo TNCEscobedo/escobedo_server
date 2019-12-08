@@ -18,8 +18,9 @@ router.get("/", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
+        const  {idPuesto,idMercado,idInspecto,nombre,monto,pagado,idTarifa,folio,fecha_hora}= req.body;
         query(
-            'SELECT * FROM cobro',
+            `CALL insertCobro(${idPuesto},${idMercado},${idInspecto},${nombre},${monto},${pagado},${idTarifa},${folio},${fecha_hora})`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
                 res.send(results);

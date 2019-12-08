@@ -5,10 +5,10 @@ const { query } = require("../db.js");
 router.get("/", async (req,res)=>{
     try{
         query(
-            'SELECT * FROM cobro',
+            `CALL getColonias()`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
-                res.send(results);
+                res.send(results[0]);
             }
         );
         
@@ -18,8 +18,9 @@ router.get("/", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
+        const {nombre} = req.body;
         query(
-            'SELECT * FROM cobro',
+            `CALL insertColonia("${nombre}")`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
                 res.send(results);
@@ -32,8 +33,9 @@ router.post("/", async (req,res)=>{
 });
 router.put("/", async (req,res)=>{
     try{
+        const{idColonia,nombre} = req.body;
         query(
-            'SELECT * FROM cobro',
+            `CALL updateColonia(${idColonia},"${nombre}")`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
                 res.send(results);
@@ -44,10 +46,10 @@ router.put("/", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
-router.delete("/", async (req,res)=>{
+router.delete("/:idColonia", async (req,res)=>{
     try{
         query(
-            'SELECT * FROM cobro',
+            `CALL deleteColonia(${req.params.idColonia})`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
                 res.send(results);

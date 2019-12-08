@@ -5,10 +5,10 @@ const { query } = require("../db.js");
 router.get("/", async (req,res)=>{
     try{
         query(
-            'SELECT * FROM cobro',
+            `CALL getMercados()`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
-                res.send(results);
+                res.send(results[0]);
             }
         );
         
@@ -18,8 +18,9 @@ router.get("/", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
+        const {idColonia, dia, turno, inicia, termina, anexo} = req.body;
         query(
-            'SELECT * FROM cobro',
+            `CALL insertMercado(${idColonia}, ${dia}, "${turno}", "${inicia}", "${termina}", "${anexo}")`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
                 res.send(results);
@@ -32,8 +33,9 @@ router.post("/", async (req,res)=>{
 });
 router.put("/", async (req,res)=>{
     try{
+        const {idMercado, idColonia, dia, turno, inicia, termina, anexo} = req.body;
         query(
-            'SELECT * FROM cobro',
+            `CALL updateMercado(${idMercado},${idColonia}, ${dia}, "${turno}", "${inicia}", "${termina}", "${anexo}")`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
                 res.send(results);
@@ -44,10 +46,10 @@ router.put("/", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
-router.delete("/", async (req,res)=>{
+router.delete("/:idMercado", async (req,res)=>{
     try{
         query(
-            'SELECT * FROM cobro',
+            `CALL deleteMercado(${req.params.idMercado})`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
                 res.send(results);

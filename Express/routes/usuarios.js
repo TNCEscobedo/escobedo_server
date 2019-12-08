@@ -18,11 +18,12 @@ router.get("/", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
+        const {nombre, uid, tipo} = req.body;
         query(
-            'SELECT * FROM cobro',
+            `CALL insertUsuario("${nombre}","${uid}",${tipo})`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
-                res.send(results);
+                res.send();
             }
         );
         
@@ -44,13 +45,14 @@ router.put("/", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
-router.delete("/", async (req,res)=>{
+router.delete("/:uidUsuario", async (req,res)=>{
     try{
+        const {uidUsuario} = req.params;
         query(
-            'SELECT * FROM cobro',
+            `CALL deleteUsuario("${uidUsuario}")`,
             function(err, results, fields) {
                 if(err) return res.status(500).send(err.message);
-                res.send(results);
+                res.send("Inspector con ID: "+uidUsuario+" ELIMINADO");
             }
         );
         
