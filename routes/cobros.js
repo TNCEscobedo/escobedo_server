@@ -39,7 +39,7 @@ router.post("/", async (req,res)=>{
     try{
         let {idPuesto,idMercado,idInspector, nombre, monto, pagado, idTarifa, folio, fecha_hora} = req.body;
         let parsedFecha = moment.unix(fecha_hora).toISOString();
-        console.log(parsedFecha);
+        //console.log(parsedFecha);
         if(pagado){
             pagado = 1;
         }else{pagado = 0;}

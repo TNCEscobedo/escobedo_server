@@ -22,8 +22,8 @@ router.get("/:idTipo", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
-        const {nombre, uid, tipo} = req.body;
-        const result = await db.rawQuery(`CALL insertUsuario("${nombre}","${uid}",${tipo})`);
+        const {nombre, uid, correo, tipo} = req.body;
+        const result = await db.rawQuery(`CALL insertUsuario("${nombre}","${uid}","${correo}",${tipo})`);
         res.sendStatus(200);
         
     }catch(error){
