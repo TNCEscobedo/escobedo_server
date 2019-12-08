@@ -5,7 +5,7 @@ const db = require("tnc_mysql_connector2");
 router.get("/", async (req,res)=>{
     try{
         const result = await db.rawQuery(`CALL getPuestos()`);
-        res.send(result);
+        res.send(result[0]);
         
     }catch(error){
         res.status(500).send(error.message);
@@ -40,15 +40,10 @@ router.put("/", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
-router.delete("/", async (req,res)=>{
+router.delete("/:idPuesto", async (req,res)=>{
     try{
-        query(
-            'SELECT * FROM cobro',
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const result = await db.rawQuery(`CALL deletePuesto(${req.params.idPuesto})`);
+        res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);

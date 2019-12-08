@@ -21,8 +21,8 @@ app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
-});
-const allowedOrigins = ["http://localhost:3000"];
+});/*
+const allowedOrigins = ["http://localhost:3000","http://localhost:4000"];
 app.use(
   cors({
     origin: function(origin, callback) {
@@ -38,7 +38,7 @@ app.use(
       return callback(null, true);
     }
   })
-);
+);*/
 db.connect({
   host: "198.54.116.46",
   port: 21098,

@@ -4,6 +4,7 @@ const cobros = require("../routes/cobros");
 const mercados = require("../routes/mercados");
 const puestos = require("../routes/puestos");
 const descuentos = require("../routes/descuentos");
+const giros = require("../routes/giros");
 module.exports = function(app){
     app.use('/usuarios', usuarios);
     app.use('/cobros', cobros);
@@ -11,4 +12,5 @@ module.exports = function(app){
     app.use('/mercados', mercados);
     app.use('/puestos', puestos);
     app.use('/descuentos', descuentos);
+    app.use('/giros', giros);
 }

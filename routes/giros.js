@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { query } = require("../db.js");
 const db = require("tnc_mysql_connector2");
+
 router.get("/", async (req,res)=>{
     try{
-        const result = await db.rawQuery(`CALL getDescuentos()`);
+        const result = await db.rawQuery(`CALL getGiros()`);
         res.send(result[0]);
         
     }catch(error){
@@ -13,26 +13,27 @@ router.get("/", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
-        const {razon, idOferente} = req.body;
-        const result = await db.rawQuery(`CALL insertDescuento("${razon}", ${idOferente})`);
-        res.sendStatus(200);
-    }catch(error){
-        res.status(500).send(error.message);
-    }
-});
-router.put("/:idDescuento", async (req,res)=>{
-    try{
-        const{autorizacion, idUsuario} = req.body;
-        const result = await db.rawQuery(`CALL updateDescuento(${req.params.idDescuento},"${autorizacion}","${idUsuario}")`);
+        const {nombre} = req.body;
+        const result = await db.rawQuery(`CALL insertGiro("${nombre}")`);
         res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);
     }
 });
-router.delete("/:idDescuento", async (req,res)=>{
+router.put("/:idGiro", async (req,res)=>{
     try{
-        const result = await db.rawQuery(`CALL deleteDescuento(${req.params.idDescuento})`);
+        const {nombre} = req.body;
+        await db.rawQuery(`CALL updateGiro(${req.params.idGiro},"${nombre}")`);
+        res.sendStatus(200);
+        
+    }catch(error){
+        res.status(500).send(error.message);
+    }
+});
+router.delete("/:idGiro", async (req,res)=>{
+    try{
+        const result = await db.rawQuery(`CALL deleteGiro(${req.params.idGiro})`);
         res.sendStatus(200);
         
     }catch(error){
