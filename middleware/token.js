@@ -1,10 +1,12 @@
 const Joi = require('@hapi/joi');
-const schema = {
+
+const schema = Joi.object({
     token: Joi.string().required()
-}
+});
+
 const token = async (req, res, next) => {
     if(req.headers.authorization){
-        const {error} = Joi.validate(req.header.authorization , schema);
+        const {error} = schema.validate(req.header.authorization);
         if(error) return res.send('El token es inválido', error);
         next();
     }
