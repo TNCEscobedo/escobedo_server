@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { query } = require("../db.js");
-
+const db = require("tnc_mysql_connector2");
 router.get("/", async (req,res)=>{
     try{
         query(
@@ -19,13 +18,8 @@ router.get("/", async (req,res)=>{
 router.post("/", async (req,res)=>{
     try{
         const {nombre, uid, tipo} = req.body;
-        query(
-            `CALL insertUsuario("${nombre}","${uid}",${tipo})`,
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send();
-            }
-        );
+        const result = await db.rawQuery(`CALL insertUsuario("${nombre}","${uid}",${tipo})`);
+        res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);
@@ -48,13 +42,8 @@ router.put("/", async (req,res)=>{
 router.delete("/:uidUsuario", async (req,res)=>{
     try{
         const {uidUsuario} = req.params;
-        query(
-            `CALL deleteUsuario("${uidUsuario}")`,
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send("Inspector con ID: "+uidUsuario+" ELIMINADO");
-            }
-        );
+        const result = await db.rawQuery(`CALL deleteUsuario("${uidUsuario}")`);
+        res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);

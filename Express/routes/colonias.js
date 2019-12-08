@@ -1,16 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { query } = require("../db.js");
-
+const db = require("tnc_mysql_connector2");
 router.get("/", async (req,res)=>{
     try{
-        query(
-            `CALL getColonias()`,
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results[0]);
-            }
-        );
+        const result = await db.rawQuery(`CALL getColonias()`);
+        res.send(result);
         
     }catch(error){
         res.status(500).send(error.message);
@@ -19,14 +13,8 @@ router.get("/", async (req,res)=>{
 router.post("/", async (req,res)=>{
     try{
         const {nombre} = req.body;
-        query(
-            `CALL insertColonia("${nombre}")`,
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
-        
+        const result = await  db.rawQuery(`CALL insertColonia("${nombre}")`);
+        res.sendStatus(200);
     }catch(error){
         res.status(500).send(error.message);
     }
@@ -34,13 +22,8 @@ router.post("/", async (req,res)=>{
 router.put("/", async (req,res)=>{
     try{
         const{idColonia,nombre} = req.body;
-        query(
-            `CALL updateColonia(${idColonia},"${nombre}")`,
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const result = await db.rawQuery(`CALL updateColonia(${idColonia},"${nombre}")`);
+        res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);
@@ -48,13 +31,8 @@ router.put("/", async (req,res)=>{
 });
 router.delete("/:idColonia", async (req,res)=>{
     try{
-        query(
-            `CALL deleteColonia(${req.params.idColonia})`,
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const result = await db.rawQuery(`CALL deleteColonia(${req.params.idColonia})`);
+        res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);

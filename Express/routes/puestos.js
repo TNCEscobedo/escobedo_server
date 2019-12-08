@@ -1,16 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const { query } = require("../db.js");
+const db = require("tnc_mysql_connector2");
 
 router.get("/", async (req,res)=>{
     try{
-        query(
-            'SELECT * FROM cobro',
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const result = await db.rawQuery(`CALL getPuestos()`);
+        res.sendStatus(result);
+        
+    }catch(error){
+        res.status(500).send(error.message);
+    }
+});
+router.get("/:idPersona", async (req,res)=>{
+    try{
+        const result = await db.rawQuery(`CALL getPuestosOferente("${req.params.idPersona}")`);
+        res.send(result);
         
     }catch(error){
         res.status(500).send(error.message);
@@ -18,13 +22,9 @@ router.get("/", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
-        query(
-            'SELECT * FROM cobro',
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const {idPersona, idGiro,idTarifa} = req.body;
+        const result = await db.rawQuery(`CALL insertPuesto(${idPersona},${idGiro},${idTarifa})`);
+        res.sendStatus(result);
         
     }catch(error){
         res.status(500).send(error.message);
