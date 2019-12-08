@@ -12,7 +12,8 @@ router.get("/", async (req,res)=>{
             const result = await db.rawQuery(`CALL getInspectoresDia("${fecha}")`);
             res.send(result[0]);
         }else{
-            const result = await db.rawQuery(`CALL getInspectoresIntervalo("${fechaInicio}", "${fechaFin}"`);
+            
+            const result = await db.rawQuery(`CALL getInspectoresIntervalo("${fechaInicio}", "${fechaFin}")`);
             res.send(result[0]);
         }
     }catch(error){
