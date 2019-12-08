@@ -17,4 +17,4 @@ const token = async (req, res, next) => {
     
 }
 
-module.exports.token = token;
+module.exports = { token };
