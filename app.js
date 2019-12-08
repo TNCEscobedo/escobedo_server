@@ -10,11 +10,11 @@ const serviceAccount = require("./firebaseKey.json");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-/*admin.initializeApp({
+admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://auth-8afcb.firebaseio.com"
 });
-*//*
+
 app.all('*', function(req, res, next) {
   var origin = req.get('origin'); 
   res.header('Access-Control-Allow-Origin', origin);
@@ -38,7 +38,7 @@ app.use(
       return callback(null, true);
     }
   })
-);*/
+);
 db.connect({
   host: "198.54.116.46",
   port: 21098,
