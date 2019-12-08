@@ -14,6 +14,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
   databaseURL: "https://auth-8afcb.firebaseio.com"
 });
 */
+app.all('*', function(req, res, next) {
+  var origin = req.get('origin'); 
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 connect(() => {
  require("./startup/routes.js")(app);
     http.listen(port, () =>
