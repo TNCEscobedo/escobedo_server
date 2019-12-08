@@ -1,5 +1,5 @@
 const express = require("express");
-const port = 4000;
+const port = process.env.PORT || 4000; //Puerto 4000 o definido por Heroku
 const app = express();
 const bodyParser = require("body-parser");
 const http = require("http").createServer(app);
