@@ -6,6 +6,7 @@ const puestos = require("../routes/puestos");
 const descuentos = require("../routes/descuentos");
 const giros = require("../routes/giros");
 const oferentes = require("../routes/oferentes");
+const tarifas = require("../routes/tarifas");
 module.exports = function(app){
     app.use('/usuarios', usuarios);
     app.use('/cobros', cobros);
@@ -15,4 +16,5 @@ module.exports = function(app){
     app.use('/descuentos', descuentos);
     app.use('/giros', giros);
     app.use('/oferentes', oferentes);
+    app.use('/tarifas', tarifas);
 }
