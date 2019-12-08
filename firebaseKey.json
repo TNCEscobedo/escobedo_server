@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mercash-escobedo",
+  "private_key_id": "199f6d294c2b3196947fdf88a55c14c7ea25541a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCorc1LbKHFJj+k\nOy+gV4utgda1my1rGfYdGne24i8VlHXikey1ozqQUUC+qe7APa0lf3RreSXAysKp\nsbUhJEsTifNNC+HdANZsiH3zK7G9bG6uLIYhgeKrOm+PQbnJkO+eidWH2+p/0O1w\nGMBMs8b3ygb9R6SEcIX2QmRcSJ5jiAqbim6jyELA1pwDX0GkAqpNJ7Hud6mlIqAl\nVWJQQNXtVZAnL/Xp0DYahBGNP7P4CJ5BcaJRDBoqB1U/hAmdA1t3yww2ArQWVjLh\nQRU6J36mlWhaOwF/sleVhghE6PKTvhWEPdXLvqEkiUTnjDxcD/d8XmEFdrCl2XjR\nYY6MYf/VAgMBAAECggEAIZLqhGM8dcXNsA45xhP20NPBnUckTKePta5Beszda1Gv\n/ydlcqfpLbWGigy/4VLFZmvOi9/CtHOHOIiPEWgsa1ivbTv6umcCxvqJ+z9MsvPk\nudVR41R7ffJ1JxIBfU3Ua/1qW47Zx5QZ1pCOohW8ejCjoIFEjTnqaCBB4p5vrEai\nZ7tLjU0+/n1ATZNP11zUEuiRe5byTCUqCceAiCKwQXgow6CJuCOvpP0JBSLU3Y6J\noDRz03rwvRt5e/gCp/V8XFY8G7h+q7em80hz30ig7EVVc/MNbBo+e110zEwWeDqt\nbucpB3MwBHgYIJ9rlps5aegHiVL4SNXH6zCu+oL5AQKBgQDaJKKNKVwOJOk6SjdU\nzBX3c5jEkNy3RkuV8vsV8AymKkVzqbOF/lzGVMMtpP9F67D5FygotsN0T/F2Tjvu\nxxc75D3lczPJ4krkhSGji0u0+dEjCQ/1zzny+D041JrlXU6uY1YAHtOTL/FLMFMC\nGirB7ksa5Dh7CjqJpWn+LThmgQKBgQDF86Og+nOAECb8TdLpJoecX9mr8TKLFOSs\n+nqsd7DY93u7HU6lHDOcMMaNTFU7hASvqO0q6D/K6bt3RhyD1KdcRUPNtntN2wSr\nZOCmgl5M+A2vGcu1lL8cSyyRCR5CWeygqvdwH4FLms52dWZhf1DcybeYpYasTfP+\nkXdZhAJ3VQKBgQDLJ5ci88PBgGqcWIXTOQW0IDnDxk1nedXm3hUsRxTgozlvEDoa\nrdrk8gebOLBsA6YbNI+36w14AwOS9CUoqM1gf52NVI6Ek3TAAaRkVNO6xXUZtdTh\nTY5gUwNhK87dkNo32lc7YXoU9282YNjNemUbmrrjXmujWtFNY3mkt6RxAQKBgQCt\nc+nDWvHuGzkuB7tx1PMrUMnZYkYZnLsr32eyzEZIN8NRmEKbZvTKPesdUO+2cN3y\nViFLYarUUK6VuvethJ8JuR/Kl8W/2NRkosY+4SlkZE8JSZ84gxha4HwysjyzgzxX\nJLggpVqUNxgGsKR/diIS9SZNOW2iecP9ItXjuEq46QKBgQDKc2PAZ+yWiCW6+SSu\nYo6MZVuPq9F4cv/PCYA0NrEeeG1Ms8sLpPNGrHPaqJ0xE5zbfKP3CcpOPWbNxN33\naIi4lJPR5gA/fI1kr2okhUecSPmaWZ//Juu4XrL2U1J74EaBf1wz4b7aoIgINscT\nUaf9u8H1aIxw9TKKv8FMLaEj2g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-dcczf@mercash-escobedo.iam.gserviceaccount.com",
+  "client_id": "110947022341367665503",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-dcczf%40mercash-escobedo.iam.gserviceaccount.com"
+}
