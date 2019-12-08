@@ -7,7 +7,7 @@ const descuentos = require("../routes/descuentos");
 const giros = require("../routes/giros");
 const oferentes = require("../routes/oferentes");
 const tarifas = require("../routes/tarifas");
-const analiticas = require("../routes/inpsectores");
+const analiticas = require("../routes/inspectores");
 module.exports = function(app){
     app.use('/usuarios', usuarios);
     app.use('/cobros', cobros);
@@ -18,5 +18,5 @@ module.exports = function(app){
     app.use('/giros', giros);
     app.use('/oferentes', oferentes);
     app.use('/tarifas', tarifas);
-    app.use('/inpsectores', inpsectores);
+    app.use('/inspectores', inspectores);
 }
