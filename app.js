@@ -22,6 +22,7 @@ app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+const allowedOrigins = ["http://localhost:3000"];
 app.use(
   cors({
     origin: function(origin, callback) {
