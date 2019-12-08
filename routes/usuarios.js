@@ -3,13 +3,17 @@ const router = express.Router();
 const db = require("tnc_mysql_connector2");
 router.get("/", async (req,res)=>{
     try{
-        query(
-            'SELECT * FROM cobro',
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const result = (await db.rawQuery(`CALL getUsuarios()`))[0];
+        res.send(result);
+        
+    }catch(error){
+        res.status(500).send(error.message);
+    }
+});
+router.get("/:idTipo", async (req,res)=>{
+    try{
+        const result = (await db.rawQuery(`CALL getUsuariosTipo(${req.params.idTipo})`))[0];
+        res.send(result);
         
     }catch(error){
         res.status(500).send(error.message);
@@ -25,15 +29,11 @@ router.post("/", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
-router.put("/", async (req,res)=>{
+router.put("/:idUsuario", async (req,res)=>{
     try{
-        query(
-            'SELECT * FROM cobro',
-            function(err, results, fields) {
-                if(err) return res.status(500).send(err.message);
-                res.send(results);
-            }
-        );
+        const {nombre, uid, correo, tipo} = req.body;
+        const result = await db.rawQuery(`CALL updateUsuario(${req.params.idUsuario},"${nombre}","${correo}",${tipo})`);
+        res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);

@@ -1,11 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const { query } = require("../db.js");
 const db = require("tnc_mysql_connector2");
+
 router.get("/", async (req,res)=>{
     try{
-        const result = await db.rawQuery(`CALL getColonias()`);
-        res.send(result);
+        const result = await db.rawQuery(`CALL getOferentes()`);
+        res.send(result[0]);
+        
+    }catch(error){
+        res.status(500).send(error.message);
+    }
+});
+router.get("/:idPersona", async (req,res)=>{
+    try{
+        const result = await db.rawQuery(`CALL getPuestosOferente("${req.params.idPersona}")`);
+        res.send(result[0]);
         
     }catch(error){
         res.status(500).send(error.message);
@@ -13,26 +22,18 @@ router.get("/", async (req,res)=>{
 });
 router.post("/", async (req,res)=>{
     try{
-        const {nombre} = req.body;
-        const result = await  db.rawQuery(`CALL insertColonia("${nombre}")`);
-        res.sendStatus(200);
-    }catch(error){
-        res.status(500).send(error.message);
-    }
-});
-router.put("/", async (req,res)=>{
-    try{
-        const{idColonia,nombre} = req.body;
-        const result = await db.rawQuery(`CALL updateColonia(${idColonia},"${nombre}")`);
+        const {nombre, telefono, idColonia} = req.body;
+        const result = await db.rawQuery(`CALL insertOferente("${nombre}", "${telefono}",${idColonia})`);
         res.sendStatus(200);
         
     }catch(error){
         res.status(500).send(error.message);
     }
 });
-router.delete("/:idColonia", async (req,res)=>{
+router.put("/:idOferente", async (req,res)=>{
     try{
-        const result = await db.rawQuery(`CALL deleteColonia(${req.params.idColonia})`);
+        const {nombre, telefono, idColonia} = req.body;
+        const result = await db.rawQuery(`CALL updateOferente(${idColonia},"${nombre}", "${telefono}",${idColonia})`);
         res.sendStatus(200);
         
     }catch(error){
