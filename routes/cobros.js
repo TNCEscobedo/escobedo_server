@@ -22,6 +22,17 @@ router.get("/fecha", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
+router.get("/:uid", async (req,res)=>{
+    try{
+        let parsedFecha = moment(req.query.fecha).toISOString();
+        console.log(parsedFecha);   
+        const result = await db.rawQuery(`CALL getCobrosFecha("${parsedFecha}")`);
+        res.send(result[0]);
+        
+    }catch(error){
+        res.status(500).send(error.message);
+    }
+});
 router.post("/", async (req,res)=>{
     try{
         let {idPuesto,idMercado,idInspector, nombre, monto, pagado, idTarifa, folio, fecha_hora} = req.body;

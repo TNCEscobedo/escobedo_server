@@ -31,7 +31,7 @@ router.post("/", async (req,res)=>{
 router.post("/", async (req,res)=>{
     try{
         const {idColonia, dia, turno, inicia, termina, anexo} = req.body;
-        const result = await db.rawQuery(`CALL insertMercado(${idColonia}, ${dia}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
+        const result = await db.rawQuery(`CALL insertMercado(${idColonia}, ${parseInt(dia)}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
         res.sendStatus(200);
     }catch(error){
         res.status(500).send(error.message);
@@ -40,7 +40,8 @@ router.post("/", async (req,res)=>{
 router.put("/:idMercado", async (req,res)=>{
     try{
         const {colonia, dia, turno, inicia, termina, anexo} = req.body;
-        const result = await db.rawQuery(`CALL updateMercado(${req.params.idMercado},${colonia}, ${dia}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
+        console.log(colonia, dia, turno, inicia, termina, anexo);
+        const result = await db.rawQuery(`CALL updateMercado(${req.params.idMercado},${colonia}, ${parseInt(dia)}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
         res.sendStatus(200);
         
     }catch(error){
