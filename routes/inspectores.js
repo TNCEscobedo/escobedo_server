@@ -3,7 +3,8 @@ const router = express.Router();
 const db = require("tnc_mysql_connector2");
 const moment = require("moment");
 const {token} = require("../middleware/token");
-const {fbAuth} = require("../middleware/fbAuth");
+const fbAuth = require("../middleware/fbAuth");
+
 router.get("/inspectores", async (req,res)=>{
     try{
         let {fecha,fechaInicio,fechaFin} = req.query;
@@ -21,3 +22,5 @@ router.get("/inspectores", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
+
+module.exports = router;
