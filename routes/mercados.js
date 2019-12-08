@@ -40,7 +40,6 @@ router.post("/", async (req,res)=>{
 router.put("/:idMercado", async (req,res)=>{
     try{
         const {colonia, dia, turno, inicia, termina, anexo} = req.body;
-        console.log(colonia, dia, turno, inicia, termina, anexo);
         const result = await db.rawQuery(`CALL updateMercado(${req.params.idMercado},${colonia}, ${parseInt(dia)}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
         res.sendStatus(200);
         
@@ -51,6 +50,24 @@ router.put("/:idMercado", async (req,res)=>{
 router.delete("/:idMercado", async (req,res)=>{
     try{
         const result = await db.rawQuery(`CALL deleteMercado(${req.params.idMercado})`);
+        res.sendStatus(200);
+        
+    }catch(error){
+        res.status(500).send(error.message);
+    }
+});
+router.delete("/inspector/:idMercado",[token,fbAuth], async (req,res)=>{
+    try{
+        const result = await db.rawQuery(`CALL deleteInspectorMercado(${req.fbUID},${req.params.idMercado})`);
+        res.sendStatus(200);
+        
+    }catch(error){
+        res.status(500).send(error.message);
+    }
+});
+router.delete("/puesto/:idMercado/:idPuesto",[token,fbAuth], async (req,res)=>{
+    try{
+        const result = await db.rawQuery(`CALL deleteMercadoPuesto(${req.params.idPuesto},${req.params.idMercado})`);
         res.sendStatus(200);
         
     }catch(error){
