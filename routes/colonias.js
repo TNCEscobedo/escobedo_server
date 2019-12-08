@@ -19,10 +19,10 @@ router.post("/", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
-router.put("/", async (req,res)=>{
+router.put("/:idColonia", async (req,res)=>{
     try{
-        const{idColonia,nombre} = req.body;
-        const result = await db.rawQuery(`CALL updateColonia(${idColonia},"${nombre}")`);
+        const{nombre} = req.body;
+        const result = await db.rawQuery(`CALL updateColonia(${req.params.idColonia},"${nombre}")`);
         res.sendStatus(200);
         
     }catch(error){

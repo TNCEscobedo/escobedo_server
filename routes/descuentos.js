@@ -22,8 +22,8 @@ router.post("/", async (req,res)=>{
 });
 router.put("/", async (req,res)=>{
     try{
-        const{idColonia,nombre} = req.body;
-        const result = await db.rawQuery(`CALL updateColonia(${idColonia},"${nombre}")`);
+        const{idDescuento,autorizacion} = req.body;
+        const result = await db.rawQuery(`CALL updateDescuentos(${idDescuento},"${autorizacion}")`);
         res.sendStatus(200);
         
     }catch(error){
