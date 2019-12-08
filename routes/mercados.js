@@ -21,15 +21,7 @@ router.get("/:idMercado", async (req,res)=>{
         res.status(500).send(error.message);
     }
 });
-router.post("/", async (req,res)=>{
-    try{
-        const {idUsuario,idMercado,fecha} = req.body;
-        const result = await db.rawQuery(`CALL getPuestosMercado(${idUsuario},${idMercado},${fecha})`);
-        res.send(result[0]);     
-    }catch(error){
-        res.status(500).send(error.message);
-    }
-});
+
 router.post("/", async (req,res)=>{
     try{
         const {idColonia, dia, turno, inicia, termina, anexo} = req.body;
@@ -41,8 +33,9 @@ router.post("/", async (req,res)=>{
 });
 router.put("/:idMercado", async (req,res)=>{
     try{
-        const {colonia, dia, turno, inicia, termina, anexo} = req.body;
-        const result = await db.rawQuery(`CALL updateMercado(${req.params.idMercado},${colonia}, ${parseInt(dia)}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
+        const {idColonia, colonia, dia, turno, inicia, termina, anexo} = req.body;
+        const coloniaToUpload = isNaN(colonia) ? idColonia : colonia;
+        const result = await db.rawQuery(`CALL updateMercado(${req.params.idMercado},${coloniaToUpload}, ${parseInt(dia)}, "${turno}", "${inicia}", "${termina}", "${anexo}")`);
         res.sendStatus(200);
         
     }catch(error){
