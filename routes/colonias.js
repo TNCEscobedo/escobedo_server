@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require("tnc_mysql_connector2");
 router.get("/", async (req,res)=>{
     try{
-        const result = await db.rawQuery(`CALL getColonias()`);
+        const result = (await db.rawQuery(`CALL getColonias()`))[0];
         res.send(result);
         
     }catch(error){
